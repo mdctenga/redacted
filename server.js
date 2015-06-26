@@ -8,12 +8,15 @@ var path = require('path');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(bodyParser.urlencoded({ extended: false}));
+
 app.get('/', function(req, res) {
-  res.render('form', { title: 'Hey', message: 'Hello there!'});
+  res.render('form', req.body);
 });
 
 app.post('/', function(req, res) {
-  res.send('Post request to the homepage');
+  console.log(req.body);
+  res.send(req.body);
 });
 
 var server = app.listen(config.port);
